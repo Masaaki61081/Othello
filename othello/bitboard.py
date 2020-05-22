@@ -336,7 +336,7 @@ class Board:
         # print("テストrandom")
         grid = self.MovablePos
         # print("テストgrid", bin(grid))
-        print(len(bin(grid)))
+        # print(len(bin(grid)))
         grid_str = str(bin(grid))
         mask = 0x1
         bits = list()
@@ -357,69 +357,24 @@ class Board:
 
         # return IN_ALPHABET[x_grid - 1] + IN_NUMBER[y_grid - 1]
         # return x_grid, y_grid
-        print(bit)
+        print(bin(bit))
         return bit
 
     def isGameOver(self):
         # 60手
         if self.Turns >= MAX_TURNS:
-            print("test_isGameOver_MAX_TURNS")
+            # print("test_isGameOver_MAX_TURNS")
             return True
         # どちらかが打てる時終了しない
         if self.MovablePos != 0:
             return False
         # 相手が打てる時終了しない
         if self.checkPut(-self.CurrentColor) != 0:
-            print("test_isGameOver_checkput")
+            # print("test_isGameOver_checkput")
             return False
         # if self.checkPut(-self.CurrentColor) != 0:
         #     return False
         # 余事象は終了
-        print("test_isGameOver_True")
-        print("test_isGameOver", self.MovablePos, self.checkPut(-self.CurrentColor))
+        # print("test_isGameOver_True")
+        # print("test_isGameOver", self.MovablePos, self.checkPut(-self.CurrentColor))
         return True
-def TestDisplay(bins):
-    mmoo = str(bins)
-    sa = 66 - len(mmoo) + 2
-    maru = str(0) * sa
-    mmoo = maru + mmoo[2:66]
-    for i in range(7):
-        print(mmoo[(8*i+2):(8*i+10)])
-
-
-# board = Board()
-# board.put("e3")
-# board.display()
-# BBB = board.BitBoard[BLACK]
-# bbb = bin(BBB)
-# WWW = board.BitBoard[WHITE]
-# www = bin(WWW)
-# atai = bin(board.checkPut(board.CurrentColor))
-# moji = str(atai)
-# print("B")
-# TestDisplay(bbb)
-# print("W")
-# TestDisplay(www)
-# print("can")
-# TestDisplay(atai)
-# print()
-# IN = "e3"
-# IN = board.coordinaterToBit("e", 3)
-# IN = bin(IN)
-# TestDisplay(IN)
-# board.put("e3")
-# board.display()
-# put = 0x0000080000000000
-# board.reverse(put)
-# BBB = board.BitBoard_B
-# bbb = bin(BBB)
-# WWW = board.BitBoard_W
-# www = bin(WWW)
-# atai = bin(board.checkPut())
-# moji = str(atai)
-# print("B")
-# TestDisplay(bbb)
-# print("W")
-# TestDisplay(www)
-# print("can")
-# TestDisplay(atai)

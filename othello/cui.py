@@ -25,20 +25,6 @@ IN_NUMBER = ['1', '2', '3', '4', '5', '6', '7', '8']
 # ボートインスタンスの作成
 board = App.Board()
 
-# テスト用初期盤面
-# board.RawBoard = np.array([
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-#     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1,-1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1,-1,-1, 1,-1, 1, 2],
-#     [2, 1, 1, 1,-1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1, 1,-1,-1, 0, 1, 2],
-#     [2, 1,-1, 1, 1, 1, 1, 1, 1, 2],
-#     [2, 1, 0,-1,-1,-1,-1, 1, 1, 2],
-#     [2, 1, 0, 0, 0, 0,-1, 1, 1, 2],
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]])
-# board.initMovable()
-
 # 手番ループ
 while True:
     # 盤面の表示
@@ -64,8 +50,6 @@ while True:
     # 入力手をチェック
     if board.checkIN(IN):
         pass
-        # x = IN_ALPHABET.index(IN[0]) + 1
-        # y = IN_NUMBER.index(IN[1]) + 1
     else:
         print('正しい形式(例:f5)で入力してください')
         continue
@@ -74,9 +58,6 @@ while True:
     if not board.put(IN):
         print('そこには置けません')
         continue
-    # else:
-    #     board.put(IN)
-    #     print("手を打つ", IN)
 
     # 終局判定
     if board.isGameOver():
@@ -96,14 +77,11 @@ while True:
 print()
 
 # 各色の数
-# count_black = np.count_nonzero(board.RawBoard[:, :] == BLACK)
-# count_white = np.count_nonzero(board.RawBoard[:, :] == WHITE)
 Black_Score, White_Score, winner = board.getResult()
 
 print('●', Black_Score)
 print('○', White_Score)
 
-# dif = count_black - count_white
 if winner == BLACK:
     print('●の勝ち')
 elif winner == WHITE:

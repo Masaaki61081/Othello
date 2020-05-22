@@ -35,8 +35,6 @@ IN_NUMBER = ['1', '2', '3', '4', '5', '6', '7', '8']
 board = App.Board()
 class OthelloGame:
     def __init__(self):
-        # self.PlayMode = CPU
-        # self.PlayMode = HUMAN
         self.PlayMode = MENU
         self.CPULevel = EASY
     # 初級
@@ -61,30 +59,7 @@ def function_H():
     board.reset()
     game.PlayMode = HUMAN
     reset()
-# テスト用初期盤面
-# board.RawBoard = np.array([
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-#     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1,-1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1,-1,-1, 1,-1, 1, 2],
-#     [2, 1, 1, 1,-1, 1, 1, 1, 1, 2],
-#     [2, 1, 1,-1, 1,-1,-1, 0, 1, 2],
-#     [2, 1,-1, 1, 1, 1, 1, 1, 1, 2],
-#     [2, 1, 0,-1,-1,-1,-1, 1, 1, 2],
-#     [2, 1, 0, 0, 0, 0,-1, 1, 1, 2],
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]])
-# board.RawBoard = np.array([
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-#     [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-#     [2,-1, 1, 0, 0, 0, 0, 1,-1, 2],
-#     [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-#     [2, 1,-1, 0, 0, 0, 0, 0, 0, 2],
-#     [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-#     [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-#     [2, 0, 0, 0, 0, 1, 0, 0, 0, 2],
-#     [2, 0, 0, 0, 0,-1, 0, 0, 0, 2],
-#     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]])
-# board.initMovable()
+
 
 ################################################
 ################メイン画面の生成################
@@ -140,16 +115,7 @@ def renew():
                 frame_list[s-1][t-1].configure(relief = 'ridge', bd = '1', bg = 'White')
             if int(stone) == BLACK:
                 frame_list[s-1][t-1].configure(relief = 'ridge', bd = '1', bg = 'Black')
-            # if int(stone) == 0:
-            #     frame_list[s-1][t-1].configure(relief = 'raised', bd = '3', bg = 'Green')
-#############
-            #
-            # stone = SUM[(x + 8*(y-1))-1]
-            # print(stone)
-            # if int(stone) == 2:
-            #     frame.configure(relief = 'ridge', bd = '1', bg = 'White')
-            # if int(stone) == BLACK:
-            #     frame.configure(relief = 'ridge', bd = '1', bg = 'Black')
+
 def reset():
     SUM = str(board.getSum())
     for s in range(1, 9):
@@ -168,42 +134,31 @@ def left_click(event):
     if game.PlayMode == MENU:
         pass
     else:
-        print("test_leftclick")
         y = event.widget.num[0]
         x = event.widget.num[1]
         x = IN_ALPHABET[x-1]
         IN = str(x+str(y))
         print(IN)
-        # print(frame_list)
         if not board.put(IN):
             board.display()
             renew()
-            print(board.CurrentColor)
+            # print(board.CurrentColor)
             pass
         else:
             board.put(IN)
-            #event.widgetで該当のオブジェクト（ウィジェット=部品）を取得できる
-            # event.widget.configure(relief = 'ridge', bd = '1', bg = "Black")
-            # num_othello = event.widget.num
-            # print(event.widget.num)
             board.display()
-            print(board.CurrentColor)
+            # print(board.CurrentColor)
             renew()
-            # if game.PlayMode == CPU:
-            #     func()
             if board.isGameOver():
                 print("end")
                 B, W = counter()
                 dif = B - W
                 if dif > 0:
                     print('黒の勝ち')
-                    print("test_leftclick_isGameOver_黒")
                 elif dif < 0:
                     print('白の勝ち')
-                    print("test_leftclick_isGameOver_白")
                 else:
                     print('引き分け')
-                    print("test_leftclick_isGameOver_引き分け")
             elif game.PlayMode == HUMAN:
                 if board.MovablePos == 0:
                     board.CurrentColor = - board.CurrentColor
@@ -213,7 +168,7 @@ def left_click(event):
                     pass
             else:
                 computer()
-                print("test_computer")
+                # print("test_computer")
 
 def computer():
     #白が打てるか
@@ -242,19 +197,14 @@ def computer():
                     dif = B - W
                     if dif > 0:
                         print('黒の勝ち')
-                        print("test_computer_isGameOver")
                     elif dif < 0:
                         print('白の勝ち')
-                        print("test_computer_isGameOver")
                     else:
                         print('引き分け')
-                        print("test_computer_isGameOver")
                     break
                 else:
                     board.CurrentColor = - board.CurrentColor
                     board.initMovable()
-                    # s, t = board.randomInput()
-                    # board.move(s, t)
                     bit = board.randomInput()
                     board.putBit(bit)
                     board.display()
@@ -292,11 +242,7 @@ for y in range(1, 9):
         SUM = str(board.getSum())
 
         stone = SUM[(x + 8*(y-1))-1]
-        print(stone)
-        # if int(stone) == 2:
-        #     frame.configure(relief = 'ridge', bd = '1', bg = 'White')
-        # if int(stone) == BLACK:
-        #     frame.configure(relief = 'ridge', bd = '1', bg = 'Black')
+        # print(stone)
     frame_list.append(x_frame)
 
 ################
